@@ -26,5 +26,5 @@ ionicBootstrap(MyApp, [
     authDomain: "demo104-60efc.firebaseapp.com",
     databaseURL: "https://demo104-60efc.firebaseio.com",
     storageBucket: "demo104-60efc.appspot.com",
-  }),
+  })
 ]);

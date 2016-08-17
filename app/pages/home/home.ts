@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, Alert} from 'ionic-angular';
+import {NavController, AlertController} from 'ionic-angular';
 import {FirebaseListObservable, FirebaseDatabase} from 'angularfire2';
 
 @Component({
@@ -11,13 +11,14 @@ export class HomePage {
 
   constructor(
     private navCtrl: NavController,
+    private alertCtrl: AlertController,
     private database: FirebaseDatabase
   ) {
     this.tasks = this.database.list('/tasks')
   }
 
   createTask(){
-    let newTaskModal = Alert.create({
+    let newTaskModal = this.alertCtrl.create({
       title: 'New Task',
       message: "Enter a title for your new task",
       inputs: [
@@ -44,7 +45,7 @@ export class HomePage {
         }
       ]
     });
-    this.navCtrl.present( newTaskModal );
+    newTaskModal.present( newTaskModal );
   }
 
   updateTask( task ){
