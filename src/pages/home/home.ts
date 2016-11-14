@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
+import { FirebaseListObservable, AngularFireDatabase  } from 'angularfire2';
 
 @Component({
   selector: 'page-home',
@@ -7,15 +8,14 @@ import {NavController, AlertController} from 'ionic-angular';
 })
 export class HomePage {
 
-  tasks: any[];
+  tasks: FirebaseListObservable<any>;
 
   constructor(
-    private navCtrl: NavController,
-    private alertCtrl: AlertController
-    //private database: FirebaseDatabase
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    public database: AngularFireDatabase
   ) {
-    this.tasks = [];
-    //this.tasks = this.database.list('/tasks')
+    this.tasks = this.database.list('/tasks')
   }
 
   createTask(){
@@ -50,15 +50,15 @@ export class HomePage {
   }
 
   updateTask( task ){
-    /*setTimeout(()=>{
+    setTimeout(()=>{
       this.tasks.update( task.$key,{
         title: task.title,
         done: task.done
       });
-    },1);*/
+    },1);
   }
 
   removeTask( task ){
-    //this.tasks.remove( task );
+    this.tasks.remove( task );
   }
 }

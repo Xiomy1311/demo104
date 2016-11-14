@@ -13,7 +13,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor='let task of tasks '>
+    <ion-item-sliding *ngFor='let task of tasks | async'>
       <ion-item>
         <ion-label>{{ task.title }}</ion-label>
         <ion-checkbox (ionChange)="updateTask( task )" [(ngModel)]="task.done"></ion-checkbox>
