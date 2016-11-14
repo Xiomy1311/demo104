@@ -1,20 +1,21 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
-import {FirebaseListObservable, FirebaseDatabase} from 'angularfire2';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
 export class HomePage {
 
-  tasks: FirebaseListObservable<any>;
+  tasks: any[];
 
   constructor(
     private navCtrl: NavController,
-    private alertCtrl: AlertController,
-    private database: FirebaseDatabase
+    private alertCtrl: AlertController
+    //private database: FirebaseDatabase
   ) {
-    this.tasks = this.database.list('/tasks')
+    this.tasks = [];
+    //this.tasks = this.database.list('/tasks')
   }
 
   createTask(){
@@ -49,15 +50,15 @@ export class HomePage {
   }
 
   updateTask( task ){
-    setTimeout(()=>{
+    /*setTimeout(()=>{
       this.tasks.update( task.$key,{
         title: task.title,
         done: task.done
       });
-    },1);
+    },1);*/
   }
 
   removeTask( task ){
-    this.tasks.remove( task );
+    //this.tasks.remove( task );
   }
 }
