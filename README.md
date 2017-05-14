@@ -1,4 +1,4 @@
-## Repositorio basado en el artículo [Formularios con Ionic](https://www.ion-book.com/blog/ionic2/form-builder/)
+## Repositorio basado en el artículo [Firebase Database + Ionic](https://www.ion-book.com/blog/ionic2/firebase-database-and-ionic/)
 
 Este proyecto usa:
 
