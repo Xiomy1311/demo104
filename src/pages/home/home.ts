@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-import { FirebaseListObservable, AngularFireDatabase  } from 'angularfire2';
+import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { FirebaseListObservable, AngularFireDatabase  } from 'angularfire2/database';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -15,7 +16,7 @@ export class HomePage {
     public alertCtrl: AlertController,
     public database: AngularFireDatabase
   ) {
-    this.tasks = this.database.list('/tasks')
+    this.tasks = this.database.list('/tasks');
   }
 
   createTask(){
@@ -50,12 +51,10 @@ export class HomePage {
   }
 
   updateTask( task ){
-    setTimeout(()=>{
-      this.tasks.update( task.$key,{
-        title: task.title,
-        done: task.done
-      });
-    },1);
+    this.tasks.update( task.$key,{
+      title: task.title,
+      done: !task.done
+    });
   }
 
   removeTask( task ){
