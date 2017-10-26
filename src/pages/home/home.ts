@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController } from 'ionic-angular';
-import { FirebaseListObservable, AngularFireDatabase  } from 'angularfire2/database';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -9,14 +10,16 @@ import { FirebaseListObservable, AngularFireDatabase  } from 'angularfire2/datab
 })
 export class HomePage {
 
-  tasks: FirebaseListObservable<any>;
+  tasksRef: AngularFireList<any>;
+  tasks: Observable<any[]>;
 
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public database: AngularFireDatabase
   ) {
-    this.tasks = this.database.list('/tasks');
+    this.tasksRef = this.database.list('tasks');
+    this.tasks = this.tasksRef.valueChanges();
   }
 
   createTask(){
@@ -39,7 +42,7 @@ export class HomePage {
         {
           text: 'Save',
           handler: data => {
-            this.tasks.push({
+            this.tasksRef.push({
               title: data.title,
               done: false
             });
@@ -51,13 +54,13 @@ export class HomePage {
   }
 
   updateTask( task ){
-    this.tasks.update( task.$key,{
+    this.tasksRef.update( task.$key,{
       title: task.title,
       done: !task.done
     });
   }
 
   removeTask( task ){
-    this.tasks.remove( task.$key );
+    this.tasksRef.remove( task.$key );
   }
 }
