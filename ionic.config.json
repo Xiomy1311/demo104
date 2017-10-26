@@ -2,5 +2,7 @@
   "name": "Demo 104",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
