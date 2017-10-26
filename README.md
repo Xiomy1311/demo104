@@ -5,7 +5,7 @@ Este proyecto usa:
 1. Cordova 7
 1. Ionic CLI 3
 1. Ionic 3
-1. Ionic Native 3
+1. Ionic Native 4
 1. AngularFire 4
 
 ## Recuerda:
