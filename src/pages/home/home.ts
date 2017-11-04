@@ -19,7 +19,10 @@ export class HomePage {
     public database: AngularFireDatabase
   ) {
     this.tasksRef = this.database.list('tasks');
-    this.tasks = this.tasksRef.valueChanges();
+    this.tasks = this.tasksRef.snapshotChanges()
+    .map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
   createTask(){
@@ -54,13 +57,14 @@ export class HomePage {
   }
 
   updateTask( task ){
-    this.tasksRef.update( task.$key,{
+    this.tasksRef.update( task.key,{
       title: task.title,
       done: !task.done
     });
   }
 
   removeTask( task ){
-    this.tasksRef.remove( task.$key );
+    console.log( task );
+    this.tasksRef.remove( task.key );
   }
 }
